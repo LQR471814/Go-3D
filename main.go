@@ -1,7 +1,7 @@
 package main
 
 import (
-	"3DEngine/lib"
+	"go3d/lib"
 
 	"github.com/veandco/go-sdl2/sdl"
 )

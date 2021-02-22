@@ -14,13 +14,13 @@ type Vertex struct {
 
 //Edge is the type for all edges
 type Edge struct {
-	From *Vertex
-	To   *Vertex
+	From int //? The integer is the index of the vertex
+	To   int
 }
 
 //Face is the type for all faces no matter how many edges
 type Face struct {
-	Vertices []*Vertex
+	Vertices []int
 }
 
 //CreateCube constructs a cube
@@ -41,15 +41,24 @@ func CreateCube(x, y, z, sidelen float64) *Mesh {
 	}
 
 	edges := []Edge{
-		{vertices[0], vertices[1]},
-		{vertices[0], vertices[2]},
-		{vertices[0], vertices[3]},
+		{0, 1},
+		{0, 2},
+		{0, 3},
 
-		{vertices[1], vertices[4]},
-		{vertices[1], vertices[5]},
-		{vertices[1], vertices[6]},
+		{1, 4},
+		{1, 5},
 
-		{vertices[2], vertices[7]},
+		{2, 4},
+		{2, 6},
+
+		{3, 5},
+		{3, 6},
+
+		{4, 7},
+
+		{5, 7},
+
+		{6, 7},
 	}
 
 	return &Mesh{
