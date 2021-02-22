@@ -1,7 +1,6 @@
 package lib
 
 import (
-	"fmt"
 	"math"
 
 	"github.com/veandco/go-sdl2/sdl"
@@ -29,7 +28,6 @@ func Render(r *sdl.Renderer, w *World) {
 
 			rasterX := int(math.Floor(normX*width) + width/2)
 			rasterY := int(math.Floor(normY*height) + height/2)
-			fmt.Println(renderCoordinates, rasterX, rasterY)
 
 			DrawCircle(r, rasterX, rasterY, 5)
 		}

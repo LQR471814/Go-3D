@@ -26,14 +26,35 @@ func main() {
 	renderer.Clear()
 	defer renderer.Destroy()
 
-	renderer.SetDrawColor(255, 255, 255, 255)
-
 	//! Run
-	lib.Render(renderer, lib.NewDefaultWorld())
+	world := lib.NewDefaultWorld()
 
 	//? Check for quit
 	running := true
 	for running {
+		renderer.SetDrawColor(255, 255, 255, 255)
+
+		lib.Render(renderer, world)
+		state := sdl.GetKeyboardState()
+		if state[sdl.SCANCODE_W] == 1 {
+			world.ActiveCamera.Translate(0, 0, 0.1)
+		}
+		if state[sdl.SCANCODE_S] == 1 {
+			world.ActiveCamera.Translate(0, 0, -0.1)
+		}
+		if state[sdl.SCANCODE_D] == 1 {
+			world.ActiveCamera.Translate(0.1, 0, 0)
+		}
+		if state[sdl.SCANCODE_A] == 1 {
+			world.ActiveCamera.Translate(-0.1, 0, 0)
+		}
+		if state[sdl.SCANCODE_SPACE] == 1 {
+			world.ActiveCamera.Translate(0, -0.1, 0)
+		}
+		if state[sdl.SCANCODE_LSHIFT] == 1 {
+			world.ActiveCamera.Translate(0, 0.1, 0)
+		}
+
 		for event := sdl.PollEvent(); event != nil; event = sdl.PollEvent() {
 			switch event.(type) {
 			case *sdl.QuitEvent:
@@ -42,5 +63,8 @@ func main() {
 				break
 			}
 		}
+		sdl.Delay(10)
+		renderer.SetDrawColor(0, 0, 0, 255)
+		renderer.Clear()
 	}
 }
