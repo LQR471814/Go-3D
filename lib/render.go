@@ -14,9 +14,11 @@ func Render(r *sdl.Renderer, w *World) {
 
 	for _, obj := range w.Objects {
 		for _, vertex := range obj.Geometry.Vertices {
-			ratio := w.ActiveCamera.FocalLength / vertex.Pos.Z
-			renderX := ratio * vertex.Pos.X
-			renderY := ratio * vertex.Pos.Y
+			renderCoordinates := AsRelativeToSystem(w.ActiveCamera.ObjSys, ToSystem(obj.ObjSys, vertex.Pos))
+
+			ratio := w.ActiveCamera.FocalLength / renderCoordinates.Z
+			renderX := ratio * renderCoordinates.X
+			renderY := ratio * renderCoordinates.Y
 
 			normX, normY := NormalizeScreen(
 				width,
@@ -27,7 +29,7 @@ func Render(r *sdl.Renderer, w *World) {
 
 			rasterX := int(math.Floor(normX*width) + width/2)
 			rasterY := int(math.Floor(normY*height) + height/2)
-			fmt.Println(rasterX, rasterY)
+			fmt.Println(renderCoordinates, rasterX, rasterY)
 
 			DrawCircle(r, rasterX, rasterY, 5)
 		}

@@ -26,17 +26,18 @@ type Face struct {
 //CreateCube constructs a cube
 func CreateCube(x, y, z, sidelen float64) *Mesh {
 	vertices := []*Vertex{
-		{Position{x, y, z}},
+		{Position{x - 0.5*sidelen, y - 0.5*sidelen, z - 0.5*sidelen}},
 
-		{Position{x + sidelen, y, z}},
-		{Position{x, y + sidelen, z}},
-		{Position{x, y, z + sidelen}},
+		{Position{x + 0.5*sidelen, y - 0.5*sidelen, z - 0.5*sidelen}},
+		{Position{x - 0.5*sidelen, y + 0.5*sidelen, z - 0.5*sidelen}},
+		{Position{x - 0.5*sidelen, y - 0.5*sidelen, z + 0.5*sidelen}},
 
-		{Position{x + sidelen, y + sidelen, z}},
-		{Position{x + sidelen, y, z + sidelen}},
-		{Position{x + sidelen, y + sidelen, z + sidelen}},
+		{Position{x + 0.5*sidelen, y + 0.5*sidelen, z - 0.5*sidelen}},
+		{Position{x + 0.5*sidelen, y - 0.5*sidelen, z + 0.5*sidelen}},
 
-		{Position{x, y + sidelen, z + sidelen}},
+		{Position{x - 0.5*sidelen, y + 0.5*sidelen, z + 0.5*sidelen}},
+
+		{Position{x + 0.5*sidelen, y + 0.5*sidelen, z + 0.5*sidelen}},
 	}
 
 	edges := []Edge{

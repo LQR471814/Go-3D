@@ -17,7 +17,6 @@ type World struct {
 type Camera struct {
 	Object
 	FocalLength float64
-	CamSys      System
 }
 
 //NewDefaultWorld constructs as default scene and returns a pointer to world
@@ -27,7 +26,7 @@ func NewDefaultWorld() *World {
 			{
 				Name: "cube",
 				ObjSys: System{
-					Origin:   Position{0, 0, 4},
+					Origin:   Position{0, 0, 5},
 					Rotation: Orientation{},
 				},
 				Geometry: CreateCube(0, 0, 0, 2),
@@ -43,10 +42,6 @@ func NewDefaultWorld() *World {
 				Geometry: &Mesh{},
 			},
 			1,
-			System{
-				Origin:   Position{0, 0, 0},
-				Rotation: Orientation{},
-			},
 		},
 	}
 }

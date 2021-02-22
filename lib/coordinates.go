@@ -20,11 +20,20 @@ type System struct {
 	Rotation Orientation
 }
 
-//ToSystem converts a given position to another coordinate system
+//ToSystem converts a given position to another coordinate system and is expressed through world coordinates
 func ToSystem(s System, p Position) Position {
 	return Position{
 		(p.X + s.Origin.X),
 		(p.Y + s.Origin.Y),
 		(p.Z + s.Origin.Z),
+	}
+}
+
+//AsRelativeToSystem converts a given world coordinate to what the same world coordinate would be expressed through the new system
+func AsRelativeToSystem(s System, p Position) Position {
+	return Position{
+		(p.X - s.Origin.X),
+		(p.Y - s.Origin.Y),
+		(p.Z - s.Origin.Z),
 	}
 }
