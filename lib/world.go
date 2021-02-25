@@ -27,7 +27,7 @@ type Camera struct {
 
 //Translate moves an object with relative measurements
 func (o *Object) Translate(x, y, z float64) {
-	o.ObjSys.Translate(
+	o.ObjSys.SetTranslate(
 		o.ObjSys.Origin.X+x,
 		o.ObjSys.Origin.Y+y,
 		o.ObjSys.Origin.Z+z,
@@ -36,7 +36,7 @@ func (o *Object) Translate(x, y, z float64) {
 
 //Rotate rotates an object with relative measurements
 func (o *Object) Rotate(r, p, y float64) {
-	o.ObjSys.Rotate(
+	o.ObjSys.SetRotation(
 		o.ObjSys.Rotation.Roll+r,
 		o.ObjSys.Rotation.Pitch+p,
 		o.ObjSys.Rotation.Yaw+y,

@@ -35,24 +35,16 @@ func main() {
 		renderer.SetDrawColor(255, 255, 255, 255)
 
 		lib.Render(renderer, world)
+
 		state := sdl.GetKeyboardState()
-		if state[sdl.SCANCODE_W] == 1 {
-			world.ActiveCamera.Translate(0, 0, 0.1)
-		}
-		if state[sdl.SCANCODE_S] == 1 {
-			world.ActiveCamera.Translate(0, 0, -0.1)
-		}
-		if state[sdl.SCANCODE_D] == 1 {
-			world.ActiveCamera.Translate(0.1, 0, 0)
-		}
-		if state[sdl.SCANCODE_A] == 1 {
-			world.ActiveCamera.Translate(-0.1, 0, 0)
-		}
-		if state[sdl.SCANCODE_SPACE] == 1 {
-			world.ActiveCamera.Translate(0, -0.1, 0)
-		}
-		if state[sdl.SCANCODE_LSHIFT] == 1 {
-			world.ActiveCamera.Translate(0, 0.1, 0)
+
+		lib.MovementHandle(world, state)
+
+		//? On Exit
+		if state[sdl.SCANCODE_ESCAPE] == 1 {
+			println("Quit")
+			running = false
+			break
 		}
 
 		for event := sdl.PollEvent(); event != nil; event = sdl.PollEvent() {
