@@ -2,26 +2,29 @@ package lib
 
 import "github.com/veandco/go-sdl2/sdl"
 
+const movementFactor = 0.05
+const rotationFactor = 0.01
+
 //CameraTranslate handles translation of the camera
 func CameraTranslate(world *World, state []uint8) {
 	//? Camera translation
 	if state[sdl.SCANCODE_W] == 1 {
-		world.ActiveCamera.Translate(0, 0, 0.1)
+		world.ActiveCamera.Translate(0, 0, movementFactor)
 	}
 	if state[sdl.SCANCODE_S] == 1 {
-		world.ActiveCamera.Translate(0, 0, -0.1)
+		world.ActiveCamera.Translate(0, 0, -movementFactor)
 	}
 	if state[sdl.SCANCODE_D] == 1 {
-		world.ActiveCamera.Translate(0.1, 0, 0)
+		world.ActiveCamera.Translate(movementFactor, 0, 0)
 	}
 	if state[sdl.SCANCODE_A] == 1 {
-		world.ActiveCamera.Translate(-0.1, 0, 0)
+		world.ActiveCamera.Translate(-movementFactor, 0, 0)
 	}
 	if state[sdl.SCANCODE_SPACE] == 1 {
-		world.ActiveCamera.Translate(0, -0.1, 0)
+		world.ActiveCamera.Translate(0, -movementFactor, 0)
 	}
 	if state[sdl.SCANCODE_LSHIFT] == 1 {
-		world.ActiveCamera.Translate(0, 0.1, 0)
+		world.ActiveCamera.Translate(0, movementFactor, 0)
 	}
 }
 
@@ -29,16 +32,16 @@ func CameraTranslate(world *World, state []uint8) {
 func CameraRotate(world *World, state []uint8) {
 	//? Camera rotation
 	if state[sdl.SCANCODE_KP_6] == 1 {
-		world.ActiveCamera.Rotate(0, 0, 0.02)
+		world.ActiveCamera.Rotate(0, 0, rotationFactor)
 	}
 	if state[sdl.SCANCODE_KP_4] == 1 {
-		world.ActiveCamera.Rotate(0, 0, -0.02)
+		world.ActiveCamera.Rotate(0, 0, -rotationFactor)
 	}
 	if state[sdl.SCANCODE_KP_8] == 1 {
-		world.ActiveCamera.Rotate(0.02, 0, 0)
+		world.ActiveCamera.Rotate(rotationFactor, 0, 0)
 	}
 	if state[sdl.SCANCODE_KP_2] == 1 {
-		world.ActiveCamera.Rotate(-0.02, 0, 0)
+		world.ActiveCamera.Rotate(-rotationFactor, 0, 0)
 	}
 }
 
@@ -46,10 +49,10 @@ func CameraRotate(world *World, state []uint8) {
 func ObjectRotate(world *World, state []uint8, objID string) {
 	//? Cube rotation
 	if state[sdl.SCANCODE_PERIOD] == 1 {
-		world.Objects[objID].Rotate(0, 0, 0.02)
+		world.Objects[objID].Rotate(0, 0, rotationFactor)
 	}
 	if state[sdl.SCANCODE_COMMA] == 1 {
-		world.Objects[objID].Rotate(0, 0, -0.02)
+		world.Objects[objID].Rotate(0, 0, -rotationFactor)
 	}
 }
 

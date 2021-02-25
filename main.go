@@ -55,7 +55,7 @@ func main() {
 				break
 			}
 		}
-		sdl.Delay(10)
+		sdl.Delay(5)
 		renderer.SetDrawColor(0, 0, 0, 255)
 		renderer.Clear()
 	}
