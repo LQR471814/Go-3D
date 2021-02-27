@@ -63,7 +63,7 @@ func NewDefaultWorld() *World {
 				},
 				Geometry: &Mesh{},
 			},
-			1,
+			2,
 		},
 	}
 }

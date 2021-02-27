@@ -6,7 +6,7 @@ import (
 	"github.com/veandco/go-sdl2/sdl"
 )
 
-//Render renders the world using given renderer
+//Render renders the world using given SDL renderer
 func Render(r *sdl.Renderer, w *World) {
 	width := float64(r.GetViewport().W)
 	height := float64(r.GetViewport().H)
