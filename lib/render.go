@@ -15,10 +15,10 @@ func Render(r *sdl.Renderer, w *World) {
 
 	for _, obj := range w.Objects {
 		for _, vertex := range obj.Geometry.Vertices {
-
 			renderCoordinates := AsRelativeToSystem(w.ActiveCamera.ObjSys, ToSystem(obj.ObjSys, vertex.Pos))
 
-			ratio := w.ActiveCamera.FocalLength / renderCoordinates.Z
+			Z := Clamp(renderCoordinates.Z, 0.0001, math.NaN())
+			ratio := w.ActiveCamera.FocalLength / math.Abs(Z)
 			renderX := ratio * renderCoordinates.X
 			renderY := ratio * renderCoordinates.Y
 
@@ -37,12 +37,14 @@ func Render(r *sdl.Renderer, w *World) {
 			DrawCircle(r, rasterX, rasterY, 5)
 		}
 		for _, edge := range obj.Geometry.Edges {
-			r.DrawLine(
-				int32(renderedVertices[edge.From][0]),
-				int32(renderedVertices[edge.From][1]),
-				int32(renderedVertices[edge.To][0]),
-				int32(renderedVertices[edge.To][1]),
-			)
+			if len(renderedVertices) > edge.From && len(renderedVertices) > edge.To {
+				r.DrawLine(
+					int32(renderedVertices[edge.From][0]),
+					int32(renderedVertices[edge.From][1]),
+					int32(renderedVertices[edge.To][0]),
+					int32(renderedVertices[edge.To][1]),
+				)
+			}
 		}
 	}
 

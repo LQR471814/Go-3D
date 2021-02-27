@@ -32,10 +32,10 @@ func CameraTranslate(world *World, state []uint8) {
 func CameraRotate(world *World, state []uint8) {
 	//? Camera rotation
 	if state[sdl.SCANCODE_KP_6] == 1 {
-		world.ActiveCamera.Rotate(0, 0, rotationFactor)
+		world.ActiveCamera.Rotate(0, 0, -rotationFactor)
 	}
 	if state[sdl.SCANCODE_KP_4] == 1 {
-		world.ActiveCamera.Rotate(0, 0, -rotationFactor)
+		world.ActiveCamera.Rotate(0, 0, rotationFactor)
 	}
 	if state[sdl.SCANCODE_KP_8] == 1 {
 		world.ActiveCamera.Rotate(rotationFactor, 0, 0)
