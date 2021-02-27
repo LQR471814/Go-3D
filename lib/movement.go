@@ -1,9 +1,11 @@
 package lib
 
-import "github.com/veandco/go-sdl2/sdl"
+import (
+	"github.com/veandco/go-sdl2/sdl"
+)
 
 const movementFactor = 0.05
-const rotationFactor = 0.01
+const rotationFactor = 0.002
 
 //CameraTranslate handles translation of the camera
 func CameraTranslate(world *World, state []uint8) {
@@ -28,21 +30,10 @@ func CameraTranslate(world *World, state []uint8) {
 	}
 }
 
-//CameraRotate handles rotation of the camera
-func CameraRotate(world *World, state []uint8) {
-	//? Camera rotation
-	if state[sdl.SCANCODE_KP_6] == 1 {
-		world.ActiveCamera.Rotate(0, 0, -rotationFactor)
-	}
-	if state[sdl.SCANCODE_KP_4] == 1 {
-		world.ActiveCamera.Rotate(0, 0, rotationFactor)
-	}
-	if state[sdl.SCANCODE_KP_8] == 1 {
-		world.ActiveCamera.Rotate(rotationFactor, 0, 0)
-	}
-	if state[sdl.SCANCODE_KP_2] == 1 {
-		world.ActiveCamera.Rotate(-rotationFactor, 0, 0)
-	}
+//MouseHandle handles mouse rotation for a given mouse motion event
+func MouseHandle(world *World, e *sdl.MouseMotionEvent) {
+	world.ActiveCamera.Rotate(0, 0, rotationFactor*float64(e.XRel))
+	world.ActiveCamera.Rotate(rotationFactor*float64(e.YRel), 0, 0)
 }
 
 //ObjectRotate handles rotation of a given object
@@ -56,10 +47,9 @@ func ObjectRotate(world *World, state []uint8, objID string) {
 	}
 }
 
-//MovementHandle Handles all movement
-func MovementHandle(world *World, state []uint8) {
+//KeyboardHandle Handles all movement
+func KeyboardHandle(world *World, state []uint8) {
 	CameraTranslate(world, state)
-	CameraRotate(world, state)
 
 	ObjectRotate(world, state, "cube")
 }

@@ -13,6 +13,8 @@ func main() {
 	}
 	defer sdl.Quit()
 
+	sdl.SetRelativeMouseMode(true)
+
 	//* Init Window
 	window, err := sdl.CreateWindow("3D", sdl.WINDOWPOS_UNDEFINED, sdl.WINDOWPOS_UNDEFINED,
 		1280, 720, sdl.WINDOW_SHOWN)
@@ -38,7 +40,7 @@ func main() {
 
 		state := sdl.GetKeyboardState()
 
-		lib.MovementHandle(world, state)
+		lib.KeyboardHandle(world, state)
 
 		//? On Exit
 		if state[sdl.SCANCODE_ESCAPE] == 1 {
@@ -48,11 +50,13 @@ func main() {
 		}
 
 		for event := sdl.PollEvent(); event != nil; event = sdl.PollEvent() {
-			switch event.(type) {
+			switch e := event.(type) {
 			case *sdl.QuitEvent:
 				println("Quit")
 				running = false
 				break
+			case *sdl.MouseMotionEvent:
+				lib.MouseHandle(world, e)
 			}
 		}
 		sdl.Delay(5)
