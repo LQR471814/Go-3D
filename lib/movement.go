@@ -32,7 +32,7 @@ func CameraTranslate(world *World, state []uint8) {
 
 //MouseHandle handles mouse rotation for a given mouse motion event
 func MouseHandle(world *World, e *sdl.MouseMotionEvent) {
-	world.ActiveCamera.Rotate(0, 0, -rotationFactor*float64(e.XRel))
+	world.ActiveCamera.Rotate(0, -rotationFactor*float64(e.XRel), 0)
 	world.ActiveCamera.Rotate(-rotationFactor*float64(e.YRel), 0, 0)
 }
 

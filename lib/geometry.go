@@ -9,7 +9,7 @@ type Mesh struct {
 
 //Vertex is the type for all vertices
 type Vertex struct {
-	Pos Position
+	Pos Vector3D
 }
 
 //Edge is the type for all edges
@@ -26,18 +26,18 @@ type Face struct {
 //CreateCube constructs a cube
 func CreateCube(x, y, z, sidelen float64) *Mesh {
 	vertices := []*Vertex{
-		{Position{x - 0.5*sidelen, y - 0.5*sidelen, z - 0.5*sidelen}},
+		{Vector3D{x - 0.5*sidelen, y - 0.5*sidelen, z - 0.5*sidelen}},
 
-		{Position{x + 0.5*sidelen, y - 0.5*sidelen, z - 0.5*sidelen}},
-		{Position{x - 0.5*sidelen, y + 0.5*sidelen, z - 0.5*sidelen}},
-		{Position{x - 0.5*sidelen, y - 0.5*sidelen, z + 0.5*sidelen}},
+		{Vector3D{x + 0.5*sidelen, y - 0.5*sidelen, z - 0.5*sidelen}},
+		{Vector3D{x - 0.5*sidelen, y + 0.5*sidelen, z - 0.5*sidelen}},
+		{Vector3D{x - 0.5*sidelen, y - 0.5*sidelen, z + 0.5*sidelen}},
 
-		{Position{x + 0.5*sidelen, y + 0.5*sidelen, z - 0.5*sidelen}},
-		{Position{x + 0.5*sidelen, y - 0.5*sidelen, z + 0.5*sidelen}},
+		{Vector3D{x + 0.5*sidelen, y + 0.5*sidelen, z - 0.5*sidelen}},
+		{Vector3D{x + 0.5*sidelen, y - 0.5*sidelen, z + 0.5*sidelen}},
 
-		{Position{x - 0.5*sidelen, y + 0.5*sidelen, z + 0.5*sidelen}},
+		{Vector3D{x - 0.5*sidelen, y + 0.5*sidelen, z + 0.5*sidelen}},
 
-		{Position{x + 0.5*sidelen, y + 0.5*sidelen, z + 0.5*sidelen}},
+		{Vector3D{x + 0.5*sidelen, y + 0.5*sidelen, z + 0.5*sidelen}},
 	}
 
 	edges := []Edge{

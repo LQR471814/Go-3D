@@ -37,9 +37,9 @@ func (o *Object) Translate(x, y, z float64) {
 //Rotate rotates an object with relative measurements
 func (o *Object) Rotate(r, p, y float64) {
 	o.ObjSys.SetRotation(
-		o.ObjSys.Rotation.Roll+r,
-		o.ObjSys.Rotation.Pitch+p,
-		o.ObjSys.Rotation.Yaw+y,
+		o.ObjSys.Rotation.X+r,
+		o.ObjSys.Rotation.Y+p,
+		o.ObjSys.Rotation.Z+y,
 	)
 }
 
@@ -49,8 +49,8 @@ func NewDefaultWorld() *World {
 		map[string]*Object{
 			"cube": {
 				ObjSys: &System{
-					Origin:   Position{0, 0, 5},
-					Rotation: Orientation{},
+					Origin:   Vector3D{0, 0, 5},
+					Rotation: Vector3D{},
 				},
 				Geometry: CreateCube(0, 0, 0, 2),
 			},
@@ -58,8 +58,8 @@ func NewDefaultWorld() *World {
 		&Camera{
 			Object{
 				ObjSys: &System{
-					Origin:   Position{0, 0, 0},
-					Rotation: Orientation{},
+					Origin:   Vector3D{0, 0, 0},
+					Rotation: Vector3D{},
 				},
 				Geometry: &Mesh{},
 			},
