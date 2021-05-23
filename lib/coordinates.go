@@ -38,23 +38,30 @@ func (s *System) Inverse() System {
 }
 
 //ToSystem converts a given position to another coordinate system and is expressed through world coordinates,
-//this is if the coordinate was the one transforming
 func ToSystem(s *System, p Vector3D) Vector3D {
-	return ApplySystem(*s, p)
+	p = ApplyRotation(*s, p)
+	p = ApplyTranslation(*s, p)
+	return p
 }
 
 //AsRelativeToSystem converts a given world coordinate to what the same world coordinate would be expressed through the new system (This is also the inverse of ToSystem)
-//this is if the System is the one transforming
 func AsRelativeToSystem(s *System, p Vector3D) Vector3D {
-	return ApplySystem(s.Inverse(), p)
+	p = ApplyTranslation(*s, p) //? Apply Translations (Before rotation because rotation center depends on origin)
+	p = ApplyRotation(*s, p)
+	return p
 }
 
-func ApplySystem(s System, p Vector3D) Vector3D {
-	//? Apply Translations (Before rotation because rotation center depends on origin)
+//ApplyTranslation applies the translation in a given coordinate system to the point
+func ApplyTranslation(s System, p Vector3D) Vector3D {
 	p.X += s.Origin.X
 	p.Y += s.Origin.Y
 	p.Z += s.Origin.Z
 
+	return p
+}
+
+//ApplyRotation applies the rotation in a given coordinate system to the point
+func ApplyRotation(s System, p Vector3D) Vector3D {
 	//? On XY plane
 	theta := s.Rotation.Z
 
