@@ -50,6 +50,11 @@ func AsRelativeToSystem(s *System, p Vector3D) Vector3D {
 }
 
 func ApplySystem(s System, p Vector3D) Vector3D {
+	//? Apply Translations (Before rotation because rotation center depends on origin)
+	p.X += s.Origin.X
+	p.Y += s.Origin.Y
+	p.Z += s.Origin.Z
+
 	//? On XY plane
 	theta := s.Rotation.Z
 
@@ -76,11 +81,6 @@ func ApplySystem(s System, p Vector3D) Vector3D {
 
 	p.Y = Y
 	p.Z = Z
-
-	//? Apply Translations
-	p.X += s.Origin.X
-	p.Y += s.Origin.Y
-	p.Z += s.Origin.Z
 
 	return p
 }
